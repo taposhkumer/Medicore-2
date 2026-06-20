@@ -5,20 +5,11 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "doctor_profiles")
+@Table(name = "pharmacist_profiles")
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class DoctorProfile {
+public class PharmacistProfile {
     @Id @Column(name = "user_id") private String userId;
-    
-    @Transient private String name; // Fetched from token/auth-service context
-    
-    private String specialization;
-    private String qualification;
-    private String location;
-    private Double visitingFee;
-    private Double rating;
-    private Boolean approval = false;
+    private String pharmacyName;
     private LocalDateTime updatedAt;
-    
     @PreUpdate @PrePersist protected void onUpdate() { this.updatedAt = LocalDateTime.now(); }
 }
