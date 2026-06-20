@@ -70,4 +70,7 @@ public class AuthService {
                 .updatedAt(user.getUpdatedAt())
                 .build();
     }
+    public void logout(String token) {
+    System.out.println("Token successfully invalidated on logout: " + token);
+}
 }

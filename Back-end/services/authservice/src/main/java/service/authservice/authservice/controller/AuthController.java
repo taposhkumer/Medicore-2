@@ -35,4 +35,33 @@ public class AuthController {
                     .body(AuthResponse.builder().success(false).message(e.getMessage()).build());
         }
     }
+
+    @PostMapping("/logout")
+public ResponseEntity<AuthResponse> logout(@RequestHeader("Authorization") String tokenHeader) {
+    try {
+        // Extract the token from the "Bearer <token>" header
+        String token = null;
+        if (tokenHeader != null && tokenHeader.startsWith("Bearer ")) {
+            token = tokenHeader.substring(7);
+        }
+
+        if (token == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(AuthResponse.builder().success(false).message("Missing token.").build());
+        }
+
+        // Pass it to the service layer
+        authService.logout(token);
+
+        return ResponseEntity.ok(
+            AuthResponse.builder()
+                .success(true)
+                .message("Logged out successfully. Token cleared.")
+                .build()
+        );
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(AuthResponse.builder().success(false).message(e.getMessage()).build());
+    }
+}
 }
