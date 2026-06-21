@@ -40,10 +40,12 @@ public class DoctorController {
     @PutMapping("/prescriptions/{id}")
     public ResponseEntity<?> writePrescription(@PathVariable String id, @RequestBody Prescription payload) {
         // 1. Role Validation
+        System.out.println(payload);
         if (isNotDoctor()) return forbiddenResponse();
 
         // 2. Process Request
         return prescRepo.findById(id).map(p -> {
+            System.out.println(p.getMedicineDetails());
             p.setDescription(payload.getDescription());
             p.setMedicineDetails(payload.getMedicineDetails());
             prescRepo.save(p);
