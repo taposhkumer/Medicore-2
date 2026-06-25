@@ -22,7 +22,7 @@ import WritePrescription from "./pages/doctor/WritePrescription";
 import PatientHistory from "./pages/doctor/PatientHistory";
 
 // Placeholder dashboards (create these files — see instructions below)
-import PharmacistDashboard from "./pages/pharmacist/PharmacistDashboard";
+import PharmacistDashboard from "./pages/pharmacist/PharmacistDashboard.jsx";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 
 function RoleWrapper({ children }) {
